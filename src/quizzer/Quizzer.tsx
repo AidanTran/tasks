@@ -42,7 +42,7 @@ export const Quizzer = () => {
     }
 
     function deleteQuiz(qId: number) {
-        setQuizzes(quizzes.filter((q: Quiz): boolean => qId === q.id));
+        setQuizzes(quizzes.filter((q: Quiz): boolean => qId !== q.id));
     }
 
     const handleShowModal = () => setShowAddModal(true);

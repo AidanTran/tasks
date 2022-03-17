@@ -1,0 +1,87 @@
+import React, { useState } from "react";
+import { Button, Form } from "react-bootstrap";
+import { Question } from "../interfaces/question";
+import { Quiz } from "../interfaces/quiz";
+
+import "./QuizEdit.css";
+
+export const QuizEdit = ({
+    quiz,
+    editQuiz,
+    deleteQuiz,
+    switchEdit,
+    resetView
+}: {
+    quiz: Quiz;
+    editQuiz: (id: number, newQuiz: Quiz) => void;
+    deleteQuiz: (id: number) => void;
+    switchEdit: () => void;
+    resetView: () => void;
+}) => {
+    const [newQuiz, setNewQuiz] = useState<Quiz>({ ...quiz });
+
+    const editQuestion = (questionId: number, newQuestion: Question) => {
+        editQuiz(quiz.id, {
+            ...quiz,
+            questionList: quiz.questionList.map(
+                (q: Question): Question =>
+                    q.id === questionId ? newQuestion : q
+            )
+        });
+    };
+
+    const saveChanges = () => {
+        editQuiz(quiz.id, { ...newQuiz });
+    };
+
+    return (
+        <div>
+            <div className="edit_header">
+                <Form.Group controlId="formEditQuizId">
+                    <Form.Label>Title: </Form.Label>
+                    <Form.Control
+                        value={newQuiz.title}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                            setNewQuiz({ ...newQuiz, title: e.target.value })
+                        }
+                    ></Form.Control>
+                    <Form.Label>Description: </Form.Label>
+                    <Form.Control
+                        as="textarea"
+                        rows={3}
+                        value={newQuiz.body}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                            setNewQuiz({ ...newQuiz, body: e.target.value })
+                        }
+                    ></Form.Control>
+                </Form.Group>
+            </div>
+            <div className="edit_footer">
+                <div>
+                    <Button
+                        variant="success"
+                        className="save_edit_btn"
+                        onClick={() => {
+                            saveChanges();
+                            switchEdit();
+                        }}
+                    >
+                        Save
+                    </Button>
+                    <Button variant="warning" onClick={switchEdit}>
+                        Cancel
+                    </Button>
+                </div>
+                <Button
+                    variant="danger"
+                    onClick={() => {
+                        deleteQuiz(quiz.id);
+                        resetView();
+                    }}
+                >
+                    Delete
+                </Button>
+            </div>
+        </div>
+    );
+};

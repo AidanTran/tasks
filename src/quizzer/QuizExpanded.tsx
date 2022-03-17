@@ -9,15 +9,17 @@ import { QuizQuestion } from "./QuizQuestion";
 export const QuizExpanded = ({
     quiz,
     editQuiz,
-    resetView
+    resetView,
+    switchEdit
 }: {
     quiz: Quiz;
     editQuiz: (id: number, newQuiz: Quiz) => void;
     resetView: () => void;
+    switchEdit: () => void;
 }) => {
     const [points, setPoints] = useState<number>(0);
     const [submitArr, setSubmitArr] = useState<boolean[]>(
-        quiz.questionList.map((q: Question): boolean => false)
+        new Array(quiz.questionList.length)
     );
 
     const handleQuestionSubmit = (index: number) => {
@@ -36,7 +38,7 @@ export const QuizExpanded = ({
     };
 
     const reset = () => {
-        setSubmitArr(submitArr.map((sub: boolean): boolean => false));
+        setSubmitArr(new Array(quiz.questionList.length));
         editQuiz(quiz.id, {
             ...quiz,
             questionList: quiz.questionList.map(
@@ -44,16 +46,6 @@ export const QuizExpanded = ({
             )
         });
         setPoints(0);
-    };
-
-    const editQuestion = (questionId: number, newQuestion: Question) => {
-        editQuiz(quiz.id, {
-            ...quiz,
-            questionList: quiz.questionList.map(
-                (q: Question): Question =>
-                    q.id === questionId ? newQuestion : q
-            )
-        });
     };
 
     const editQuestionSub = (questionId: number, sub: string) => {
@@ -73,12 +65,25 @@ export const QuizExpanded = ({
                     <h1 className="title">{quiz.title}</h1>
                     <p>{quiz.questionList.length} questions</p>
                 </div>
-                <Button
-                    className="esc_button text-align-center"
-                    onClick={resetView}
-                >
-                    {"Exit"}
-                </Button>
+                <div>
+                    <Button
+                        className="esc_button text-align-center"
+                        variant="warning"
+                        onClick={() => {
+                            reset();
+                            switchEdit();
+                        }}
+                    >
+                        Edit
+                    </Button>
+                    <Button
+                        className="esc_button text-align-center"
+                        variant="danger"
+                        onClick={resetView}
+                    >
+                        {"Exit"}
+                    </Button>
+                </div>
             </div>
             <p className="desc">{quiz.body}</p>
             {quiz.questionList.map((q: Question, index: number) => (
@@ -93,7 +98,9 @@ export const QuizExpanded = ({
                 ></QuizQuestion>
             ))}
             <div className="footer">
-                <Button onClick={reset}>Reset</Button>
+                <Button variant="danger" onClick={reset}>
+                    Reset
+                </Button>
                 <span className="score_report">
                     {points}/{totalPoints}
                 </span>
