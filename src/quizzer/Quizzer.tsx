@@ -49,7 +49,7 @@ export const Quizzer = () => {
     const handleCloseModal = () => setShowAddModal(false);
 
     return (
-        <>
+        <div>
             <QuizList
                 quizzes={quizzes}
                 editQuiz={editQuiz}
@@ -63,6 +63,6 @@ export const Quizzer = () => {
                     addQuiz={addQuiz}
                 ></AddQuizModal>
             </div>
-        </>
+        </div>
     );
 };

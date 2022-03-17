@@ -19,7 +19,9 @@ function App(): JSX.Element {
                     {quizzer ? "Quizzer" : "Tasks"}
                 </Button>
             </header>
-            {quizzer && <Quizzer></Quizzer>}
+            <div style={{ display: quizzer ? "block" : "none" }}>
+                <Quizzer></Quizzer>
+            </div>
             <ShowHideTasks visible={!quizzer}></ShowHideTasks>
         </div>
     );

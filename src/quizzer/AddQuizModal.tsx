@@ -23,7 +23,7 @@ export const AddQuizModal = ({
     };
 
     return (
-        <>
+        <div>
             <Modal show={show} onHide={handleClose} animation={false}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add New Quiz</Modal.Title>
@@ -64,6 +64,6 @@ export const AddQuizModal = ({
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </>
+        </div>
     );
 };
