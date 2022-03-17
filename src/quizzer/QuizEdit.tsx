@@ -21,9 +21,9 @@ export const QuizEdit = ({
     const [newQuiz, setNewQuiz] = useState<Quiz>({ ...quiz });
 
     const editQuestion = (questionId: number, newQuestion: Question) => {
-        editQuiz(quiz.id, {
-            ...quiz,
-            questionList: quiz.questionList.map(
+        setNewQuiz({
+            ...newQuiz,
+            questionList: newQuiz.questionList.map(
                 (q: Question): Question =>
                     q.id === questionId ? newQuestion : q
             )
@@ -32,6 +32,19 @@ export const QuizEdit = ({
 
     const saveChanges = () => {
         editQuiz(quiz.id, { ...newQuiz });
+    };
+
+    const swapQuestion = (idx1: number, idx2: number) => {
+        setNewQuiz({
+            ...newQuiz,
+            questionList: quiz.questionList.map(
+                (q: Question, idx: number): Question => {
+                    if (idx === idx1) return newQuiz.questionList[idx2];
+                    if (idx === idx2) return newQuiz.questionList[idx1];
+                    return q;
+                }
+            )
+        });
     };
 
     return (
@@ -80,6 +93,19 @@ export const QuizEdit = ({
                     ></Form.Control>
                 </Form.Group>
             </div>
+
+            <div>
+                {newQuiz.questionList.map((q: Question) => (
+                    <p key={q.id}>{q.body}</p>
+                ))}
+            </div>
+            <Button
+                onClick={() => {
+                    swapQuestion(1, 2);
+                }}
+            >
+                Swap 2 and 3!
+            </Button>
 
             <div className="edit_footer">
                 <div>
