@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { Quiz } from "../interfaces/quiz";
 import { QuizCard } from "./QuizCard";
-import { QuizExpanded } from "./QuizExpanded";
 import "./QuizList.css";
+import { QuizView } from "./QuizView";
 
 export const QuizList = ({
     quizzes,
@@ -46,13 +46,13 @@ export const QuizList = ({
             {quizzes.map((quiz: Quiz) => {
                 if (displayId === quiz.id) {
                     return (
-                        <QuizExpanded
+                        <QuizView
                             key={quiz.id}
                             quiz={quiz}
                             editQuiz={editQuiz}
                             deleteQuiz={deleteQuiz}
                             resetView={resetQuizView}
-                        ></QuizExpanded>
+                        ></QuizView>
                     );
                 }
             })}

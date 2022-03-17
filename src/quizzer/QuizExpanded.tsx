@@ -9,12 +9,10 @@ import { QuizQuestion } from "./QuizQuestion";
 export const QuizExpanded = ({
     quiz,
     editQuiz,
-    deleteQuiz,
     resetView
 }: {
     quiz: Quiz;
     editQuiz: (id: number, newQuiz: Quiz) => void;
-    deleteQuiz: (id: number) => void;
     resetView: () => void;
 }) => {
     const [points, setPoints] = useState<number>(0);
@@ -69,7 +67,7 @@ export const QuizExpanded = ({
     };
 
     return (
-        <div className="quiz_card">
+        <>
             <div className="d-flex justify-content-between align-items-center">
                 <div className="d-flex align-items-baseline">
                     <h1 className="title">{quiz.title}</h1>
@@ -100,6 +98,6 @@ export const QuizExpanded = ({
                     {points}/{totalPoints}
                 </span>
             </div>
-        </div>
+        </>
     );
 };
