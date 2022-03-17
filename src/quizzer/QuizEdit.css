@@ -1,0 +1,21 @@
+.edit_footer {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-control {
+    margin-bottom: 1rem;
+}
+.save_edit_btn {
+    margin-right: 2rem;
+}
+
+.published_check {
+    align-self: center;
+}
+
+.title_published_flex {
+    display: flex;
+    justify-content: space-between;
+}

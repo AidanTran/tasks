@@ -32,8 +32,8 @@ export function ChooseTeam(): JSX.Element {
     return (
         <div>
             <h3>Choose Team</h3>
-            <Row>
-                <Col>
+            <Row style={{ margin: 0 }}>
+                <Col style={{ padding: 0 }}>
                     {allOptions.map((option: string) => (
                         <div key={option} style={{ marginBottom: "4px" }}>
                             Add{" "}
