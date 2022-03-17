@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Quiz } from "../interfaces/quiz";
 import { Question, QuestionType } from "../interfaces/question";
+import { QuizList } from "./QuizList";
+import { AddQuizModal } from "./AddQuizModal";
 
 import sample from "../data/quizzes.json";
+import { Button } from "react-bootstrap";
 
 const QUIZZES = sample.map(
     (quiz): Quiz => ({
@@ -17,21 +20,49 @@ const QUIZZES = sample.map(
     })
 );
 
-/* {quizzes.map((quiz: Quiz) => (
-                <div key={quiz.id}>
-                    {quiz.id + " " + quiz.questionList[0].body}
-                </div>
-            ))} */
-
-export function Quizzer(): JSX.Element {
+export const Quizzer = () => {
     const [quizzes, setQuizzes] = useState<Quiz[]>(QUIZZES);
+    const [showAddModal, setShowAddModal] = useState(false);
+
+    function editQuiz(qId: number, newQuiz: Quiz) {
+        setQuizzes(
+            quizzes.map((q: Quiz): Quiz => (q.id === qId ? newQuiz : q))
+        );
+    }
+
+    function addQuiz(title: string, body: string) {
+        const newQuiz = {
+            id: quizzes.length + 1,
+            title: title,
+            body: body,
+            published: false,
+            questionList: [] as Question[]
+        };
+        setQuizzes([...quizzes, newQuiz]);
+    }
+
+    function deleteQuiz(qId: number) {
+        setQuizzes(quizzes.filter((q: Quiz): boolean => qId === q.id));
+    }
+
+    const handleShowModal = () => setShowAddModal(true);
+    const handleCloseModal = () => setShowAddModal(false);
+
     return (
         <>
-            {quizzes.map((quiz: Quiz) => (
-                <div key={quiz.id}>
-                    {quiz.id + " " + quiz.questionList[0].body}
-                </div>
-            ))}
+            <QuizList
+                quizzes={quizzes}
+                editQuiz={editQuiz}
+                deleteQuiz={deleteQuiz}
+            ></QuizList>
+            <div>
+                <Button onClick={handleShowModal}>Add New Quiz</Button>
+                <AddQuizModal
+                    show={showAddModal}
+                    handleClose={handleCloseModal}
+                    addQuiz={addQuiz}
+                ></AddQuizModal>
+            </div>
         </>
     );
-}
+};
