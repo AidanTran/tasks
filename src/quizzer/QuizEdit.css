@@ -10,3 +10,12 @@
 .save_edit_btn {
     margin-right: 2rem;
 }
+
+.published_check {
+    align-self: center;
+}
+
+.title_published_flex {
+    display: flex;
+    justify-content: space-between;
+}

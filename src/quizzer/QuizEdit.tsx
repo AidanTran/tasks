@@ -38,13 +38,37 @@ export const QuizEdit = ({
         <div>
             <div className="edit_header">
                 <Form.Group controlId="formEditQuizId">
-                    <Form.Label>Title: </Form.Label>
-                    <Form.Control
-                        value={newQuiz.title}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                            setNewQuiz({ ...newQuiz, title: e.target.value })
-                        }
-                    ></Form.Control>
+                    <div className="title_published_flex">
+                        <div className="edit_title_area">
+                            <Form.Label>Title: </Form.Label>
+                            <Form.Control
+                                value={newQuiz.title}
+                                onChange={(
+                                    e: React.ChangeEvent<HTMLInputElement>
+                                ) =>
+                                    setNewQuiz({
+                                        ...newQuiz,
+                                        title: e.target.value
+                                    })
+                                }
+                            ></Form.Control>
+                        </div>
+                        <Form.Check
+                            className="published_check"
+                            type="checkbox"
+                            id="is-published_check"
+                            label="Published"
+                            checked={newQuiz.published}
+                            onChange={(
+                                e: React.ChangeEvent<HTMLInputElement>
+                            ) => {
+                                setNewQuiz({
+                                    ...newQuiz,
+                                    published: e.target.checked
+                                });
+                            }}
+                        ></Form.Check>
+                    </div>
                     <Form.Label>Description: </Form.Label>
                     <Form.Control
                         as="textarea"
@@ -56,6 +80,7 @@ export const QuizEdit = ({
                     ></Form.Control>
                 </Form.Group>
             </div>
+
             <div className="edit_footer">
                 <div>
                     <Button
