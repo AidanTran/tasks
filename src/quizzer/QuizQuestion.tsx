@@ -8,16 +8,28 @@ type ChangeEvent = React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>;
 
 export const QuizQuestion = ({
     index,
-    question
+    question,
+    submitted,
+    handleSubmit,
+    addPoints,
+    editQuestionSub
 }: {
     index: number;
     question: Question;
+    submitted: boolean;
+    handleSubmit: (index: number) => void;
+    addPoints: (p: number) => void;
+    editQuestionSub: (questionId: number, newAns: string) => void;
 }) => {
-    const [ans, setAns] = useState("");
-
     const handleClick = (e: ChangeEvent) => {
-        setAns(e.target.value);
-        console.log(ans);
+        editQuestionSub(question.id, e.target.value);
+    };
+
+    const handleSubmitClick = () => {
+        handleSubmit(index);
+        if (question.submission === question.expected) {
+            addPoints(question.points);
+        }
     };
 
     return (
@@ -31,7 +43,7 @@ export const QuizQuestion = ({
                     {question.type === "short_answer_question" && (
                         <Form.Group controlId="formShortAnswerBox">
                             <Form.Control
-                                value={ans}
+                                value={question.submission}
                                 onChange={handleClick}
                             ></Form.Control>
                         </Form.Group>
@@ -46,14 +58,20 @@ export const QuizQuestion = ({
                                         key={option + " | " + i}
                                         label={option}
                                         value={option}
-                                        checked={ans === option}
+                                        checked={question.submission === option}
                                         onChange={handleClick}
                                     />
                                 )
                             )}
                         </div>
                     )}
-                    <Button className="submit_btn">Submit</Button>
+                    <Button
+                        disabled={submitted}
+                        className="submit_btn"
+                        onClick={handleSubmitClick}
+                    >
+                        Submit
+                    </Button>
                 </div>
             </div>
         </>
