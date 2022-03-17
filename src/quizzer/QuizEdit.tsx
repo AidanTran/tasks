@@ -116,7 +116,7 @@ export const QuizEdit = ({
                     ></QuestionEdit>
                 ))}
             </div>
-
+            <hr />
             <div className="edit_footer">
                 <div>
                     <Button
@@ -140,7 +140,7 @@ export const QuizEdit = ({
                         resetView();
                     }}
                 >
-                    Delete
+                    Delete Quiz
                 </Button>
             </div>
         </div>

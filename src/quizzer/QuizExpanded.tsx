@@ -103,6 +103,7 @@ export const QuizExpanded = ({
                     editQuestionSub={editQuestionSub}
                 ></QuizQuestion>
             ))}
+            <hr />
             <div className="footer">
                 <Button variant="danger" onClick={reset}>
                     Reset

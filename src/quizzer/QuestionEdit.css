@@ -10,3 +10,9 @@
 .edit_question {
     padding: 20px 0;
 }
+
+.edit_question_footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
