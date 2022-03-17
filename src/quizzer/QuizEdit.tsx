@@ -20,15 +20,15 @@ export const QuizEdit = ({
 }) => {
     const [newQuiz, setNewQuiz] = useState<Quiz>({ ...quiz });
 
-    const editQuestion = (questionId: number, newQuestion: Question) => {
-        setNewQuiz({
-            ...newQuiz,
-            questionList: newQuiz.questionList.map(
-                (q: Question): Question =>
-                    q.id === questionId ? newQuestion : q
-            )
-        });
-    };
+    // const editQuestion = (questionId: number, newQuestion: Question) => {
+    //     setNewQuiz({
+    //         ...newQuiz,
+    //         questionList: newQuiz.questionList.map(
+    //             (q: Question): Question =>
+    //                 q.id === questionId ? newQuestion : q
+    //         )
+    //     });
+    // };
 
     const saveChanges = () => {
         editQuiz(quiz.id, { ...newQuiz });
