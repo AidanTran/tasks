@@ -31,6 +31,15 @@ export const QuizEdit = ({
         });
     };
 
+    const removeQuestion = (questionId: number) => {
+        setNewQuiz({
+            ...newQuiz,
+            questionList: newQuiz.questionList.filter(
+                (q: Question) => q.id !== questionId
+            )
+        });
+    };
+
     const saveChanges = () => {
         editQuiz(quiz.id, { ...newQuiz });
     };
@@ -102,6 +111,8 @@ export const QuizEdit = ({
                         index={index}
                         question={q}
                         editQuestion={editQuestion}
+                        removeQuestion={removeQuestion}
+                        swapQuestion={swapQuestion}
                     ></QuestionEdit>
                 ))}
             </div>

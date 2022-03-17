@@ -7,11 +7,15 @@ import "./QuestionEdit.css";
 export const QuestionEdit = ({
     index,
     question,
-    editQuestion
+    editQuestion,
+    removeQuestion,
+    swapQuestion
 }: {
     index: number;
     question: Question;
     editQuestion: (questionId: number, newQuestion: Question) => void;
+    removeQuestion: (questionId: number) => void;
+    swapQuestion: (idx1: number, idx2: number) => void;
 }) => {
     return (
         <>
@@ -81,6 +85,14 @@ export const QuestionEdit = ({
                             });
                         }}
                     ></Form.Check>
+                    <Button
+                        variant="danger"
+                        onClick={() => {
+                            removeQuestion(question.id);
+                        }}
+                    >
+                        Delete
+                    </Button>
                 </div>
             </div>
         </>
