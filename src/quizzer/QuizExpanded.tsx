@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
+import { Question } from "../interfaces/question";
 import { Quiz } from "../interfaces/quiz";
 
 import "./QuizExpanded.css";
+import { QuizQuestion } from "./QuizQuestion";
 
 export const QuizExpanded = ({
     quiz,
@@ -30,6 +32,13 @@ export const QuizExpanded = ({
                 </Button>
             </div>
             <p className="desc">{quiz.body}</p>
+            {quiz.questionList.map((q: Question, index: number) => (
+                <QuizQuestion
+                    key={quiz.id + "|" + q.id}
+                    index={index}
+                    question={q}
+                ></QuizQuestion>
+            ))}
         </div>
     );
 };
