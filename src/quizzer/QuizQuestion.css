@@ -6,10 +6,18 @@
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: flex-end;
 }
 
 .submit_btn {
     height: 2.5rem;
     margin-top: auto;
+}
+
+.sub_check {
+    text-align: center;
+}
+
+.hidden {
+    visibility: hidden;
 }

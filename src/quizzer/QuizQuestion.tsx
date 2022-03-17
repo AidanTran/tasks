@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Question } from "../interfaces/question";
-import { Row, Col, Form, Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 
 import "./QuizQuestion.css";
-
 type ChangeEvent = React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>;
 
 export const QuizQuestion = ({
@@ -65,13 +64,20 @@ export const QuizQuestion = ({
                             )}
                         </div>
                     )}
-                    <Button
-                        disabled={submitted}
-                        className="submit_btn"
-                        onClick={handleSubmitClick}
-                    >
-                        Submit
-                    </Button>
+                    <div className="sub_check">
+                        <h2 className={submitted ? "" : "hidden"}>
+                            {question.submission === question.expected
+                                ? "✔️"
+                                : "❌"}
+                        </h2>
+                        <Button
+                            disabled={submitted}
+                            className="submit_btn"
+                            onClick={handleSubmitClick}
+                        >
+                            Submit
+                        </Button>
+                    </div>
                 </div>
             </div>
         </>
