@@ -4,6 +4,7 @@ import { Question, QuestionType } from "../interfaces/question";
 import { QuizList } from "./QuizList";
 import { AddQuizModal } from "./AddQuizModal";
 
+import "./Quizzer.css";
 import sample from "../data/quizzes.json";
 import { Button } from "react-bootstrap";
 
@@ -49,7 +50,7 @@ export const Quizzer = () => {
     const handleCloseModal = () => setShowAddModal(false);
 
     return (
-        <div>
+        <div className="quizzer">
             <QuizList
                 quizzes={quizzes}
                 editQuiz={editQuiz}

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Quiz } from "../interfaces/quiz";
-import { Question, QuestionType } from "../interfaces/question";
+import { QuizCard } from "./QuizCard";
+import "./QuizList.css";
 
 export const QuizList = ({
     quizzes,
@@ -11,11 +12,38 @@ export const QuizList = ({
     editQuiz: (id: number, newQuiz: Quiz) => void;
     deleteQuiz: (id: number) => void;
 }) => {
+    const [displayId, setDisplayId] = useState<null | number>(null);
+
+    const handleQuizView = (id: number) => {
+        setDisplayId(id);
+        console.log(displayId);
+    };
+
+    const resetQuizView = () => {
+        setDisplayId(null);
+    };
+
     return (
-        <>
-            {quizzes.map((quiz: Quiz) => (
-                <div key={quiz.id}>{quiz.id + " " + quiz.title}</div>
-            ))}
-        </>
+        <div className="quiz_list">
+            {!displayId &&
+                quizzes.map((quiz: Quiz) => (
+                    <QuizCard
+                        key={quiz.id}
+                        quiz={quiz}
+                        handleClick={handleQuizView}
+                    ></QuizCard>
+                ))}
+            {quizzes.map((quiz: Quiz) => {
+                if (displayId === quiz.id) {
+                    return (
+                        <QuizCard
+                            key={quiz.id}
+                            quiz={quiz}
+                            handleClick={handleQuizView}
+                        ></QuizCard>
+                    );
+                }
+            })}
+        </div>
     );
 };

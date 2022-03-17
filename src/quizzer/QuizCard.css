@@ -1,0 +1,9 @@
+.quiz_card {
+    background-color: white;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.title {
+    margin-right: 1rem;
+}
