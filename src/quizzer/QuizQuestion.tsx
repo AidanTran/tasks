@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Question } from "../interfaces/question";
-import { Row, Col, Form } from "react-bootstrap";
+import { Row, Col, Form, Button } from "react-bootstrap";
 
 import "./QuizQuestion.css";
 
@@ -36,18 +36,24 @@ export const QuizQuestion = ({
                             ></Form.Control>
                         </Form.Group>
                     )}
-                    {question.type === "multiple_choice_question"}
-                    {question.options.map((option: string, i: number) => (
-                        <Form.Check
-                            type="radio"
-                            name={"questionChoice" + index}
-                            key={option + " | " + i}
-                            label={option}
-                            value={option}
-                            checked={ans === option}
-                            onChange={handleClick}
-                        />
-                    ))}
+                    {question.type === "multiple_choice_question" && (
+                        <div>
+                            {question.options.map(
+                                (option: string, i: number) => (
+                                    <Form.Check
+                                        type="radio"
+                                        name={"questionChoice" + index}
+                                        key={option + " | " + i}
+                                        label={option}
+                                        value={option}
+                                        checked={ans === option}
+                                        onChange={handleClick}
+                                    />
+                                )
+                            )}
+                        </div>
+                    )}
+                    <Button className="submit_btn">Submit</Button>
                 </div>
             </div>
         </>

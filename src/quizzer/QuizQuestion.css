@@ -4,5 +4,12 @@
 
 .answer_box {
     margin-top: 20px;
-    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.submit_btn {
+    height: 2.5rem;
+    margin-top: auto;
 }

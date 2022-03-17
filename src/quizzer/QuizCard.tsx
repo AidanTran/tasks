@@ -12,7 +12,7 @@ export const QuizCard = ({
     handleClick: (id: number) => void;
 }) => {
     return (
-        <div className="quiz_card">
+        <div className="quiz_view_card">
             <div className="d-flex align-items-baseline">
                 <h3
                     className="title"
