@@ -1,0 +1,12 @@
+.edit_title_row {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.title_input {
+    width: 50%;
+}
+
+.edit_question {
+    padding: 20px 0;
+}

@@ -36,7 +36,7 @@ export const QuizQuestion = ({
             <hr />
             <div className="question">
                 <h4>
-                    {index}. {question.body}
+                    {index + 1}. {question.body}
                 </h4>
                 <div className="answer_box">
                     {question.type === "short_answer_question" && (

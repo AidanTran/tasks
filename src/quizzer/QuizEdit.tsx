@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Question } from "../interfaces/question";
 import { Quiz } from "../interfaces/quiz";
+import { QuestionEdit } from "./QuestionEdit";
 
 import "./QuizEdit.css";
 
@@ -20,15 +21,15 @@ export const QuizEdit = ({
 }) => {
     const [newQuiz, setNewQuiz] = useState<Quiz>({ ...quiz });
 
-    // const editQuestion = (questionId: number, newQuestion: Question) => {
-    //     setNewQuiz({
-    //         ...newQuiz,
-    //         questionList: newQuiz.questionList.map(
-    //             (q: Question): Question =>
-    //                 q.id === questionId ? newQuestion : q
-    //         )
-    //     });
-    // };
+    const editQuestion = (questionId: number, newQuestion: Question) => {
+        setNewQuiz({
+            ...newQuiz,
+            questionList: newQuiz.questionList.map(
+                (q: Question): Question =>
+                    q.id === questionId ? newQuestion : q
+            )
+        });
+    };
 
     const saveChanges = () => {
         editQuiz(quiz.id, { ...newQuiz });
@@ -95,17 +96,15 @@ export const QuizEdit = ({
             </div>
 
             <div>
-                {newQuiz.questionList.map((q: Question) => (
-                    <p key={q.id}>{q.body}</p>
+                {newQuiz.questionList.map((q: Question, index: number) => (
+                    <QuestionEdit
+                        key={newQuiz.id + "|" + q.id}
+                        index={index}
+                        question={q}
+                        editQuestion={editQuestion}
+                    ></QuestionEdit>
                 ))}
             </div>
-            <Button
-                onClick={() => {
-                    swapQuestion(1, 2);
-                }}
-            >
-                Swap 2 and 3!
-            </Button>
 
             <div className="edit_footer">
                 <div>
