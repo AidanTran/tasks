@@ -5,3 +5,8 @@
     gap: 20px;
     text-align: left;
 }
+
+.add_btn {
+    width: 10rem;
+    align-self: center;
+}

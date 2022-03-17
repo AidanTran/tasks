@@ -1,0 +1,17 @@
+.quiz_card {
+    background-color: white;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.title {
+    margin-right: 1rem;
+}
+
+.desc {
+    font-size: 1.25rem;
+}
+
+.esc_button {
+    height: 2.5rem;
+}

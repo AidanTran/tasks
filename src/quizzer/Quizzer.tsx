@@ -6,7 +6,6 @@ import { AddQuizModal } from "./AddQuizModal";
 
 import "./Quizzer.css";
 import sample from "../data/quizzes.json";
-import { Button } from "react-bootstrap";
 
 const QUIZZES = sample.map(
     (quiz): Quiz => ({
@@ -55,15 +54,13 @@ export const Quizzer = () => {
                 quizzes={quizzes}
                 editQuiz={editQuiz}
                 deleteQuiz={deleteQuiz}
+                showModal={handleShowModal}
             ></QuizList>
-            <div>
-                <Button onClick={handleShowModal}>Add New Quiz</Button>
-                <AddQuizModal
-                    show={showAddModal}
-                    handleClose={handleCloseModal}
-                    addQuiz={addQuiz}
-                ></AddQuizModal>
-            </div>
+            <AddQuizModal
+                show={showAddModal}
+                handleClose={handleCloseModal}
+                addQuiz={addQuiz}
+            ></AddQuizModal>
         </div>
     );
 };

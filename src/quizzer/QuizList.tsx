@@ -1,16 +1,20 @@
 import React, { useState } from "react";
+import { Button } from "react-bootstrap";
 import { Quiz } from "../interfaces/quiz";
 import { QuizCard } from "./QuizCard";
+import { QuizExpanded } from "./QuizExpanded";
 import "./QuizList.css";
 
 export const QuizList = ({
     quizzes,
     editQuiz,
-    deleteQuiz
+    deleteQuiz,
+    showModal
 }: {
     quizzes: Quiz[];
     editQuiz: (id: number, newQuiz: Quiz) => void;
     deleteQuiz: (id: number) => void;
+    showModal: () => void;
 }) => {
     const [displayId, setDisplayId] = useState<null | number>(null);
 
@@ -25,22 +29,30 @@ export const QuizList = ({
 
     return (
         <div className="quiz_list">
-            {!displayId &&
-                quizzes.map((quiz: Quiz) => (
-                    <QuizCard
-                        key={quiz.id}
-                        quiz={quiz}
-                        handleClick={handleQuizView}
-                    ></QuizCard>
-                ))}
-            {quizzes.map((quiz: Quiz) => {
-                if (displayId === quiz.id) {
-                    return (
+            {!displayId && (
+                <>
+                    {quizzes.map((quiz: Quiz) => (
                         <QuizCard
                             key={quiz.id}
                             quiz={quiz}
                             handleClick={handleQuizView}
                         ></QuizCard>
+                    ))}
+                    <Button className="add_btn" onClick={showModal}>
+                        Add New Quiz
+                    </Button>
+                </>
+            )}
+            {quizzes.map((quiz: Quiz) => {
+                if (displayId === quiz.id) {
+                    return (
+                        <QuizExpanded
+                            key={quiz.id}
+                            quiz={quiz}
+                            editQuiz={editQuiz}
+                            deleteQuiz={deleteQuiz}
+                            resetView={resetQuizView}
+                        ></QuizExpanded>
                     );
                 }
             })}
