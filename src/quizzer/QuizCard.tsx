@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Quiz } from "../interfaces/quiz";
-import { Row, Col } from "react-bootstrap";
 
 import "./QuizCard.css";
+import { Question } from "../interfaces/question";
 
 export const QuizCard = ({
     quiz,
@@ -11,6 +11,11 @@ export const QuizCard = ({
     quiz: Quiz;
     handleClick: (id: number) => void;
 }) => {
+    const filteredQuestions = quiz.questionList.filter(
+        (q: Question): boolean =>
+            (quiz.published && q.published) || !quiz.published
+    );
+
     return (
         <div className="quiz_view_card">
             <div className="d-flex align-items-baseline">
@@ -22,7 +27,10 @@ export const QuizCard = ({
                 >
                     {quiz.title}
                 </h3>
-                <p>{quiz.questionList.length} questions</p>
+                <p>
+                    {filteredQuestions.length} question
+                    {filteredQuestions.length !== 1 ? "s" : ""}
+                </p>
             </div>
             <p>{quiz.body}</p>
         </div>

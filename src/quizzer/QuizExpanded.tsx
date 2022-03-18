@@ -69,7 +69,10 @@ export const QuizExpanded = ({
             <div className="d-flex justify-content-between align-items-center">
                 <div className="d-flex align-items-baseline">
                     <h1 className="title">{quiz.title}</h1>
-                    <p>{quiz.questionList.length} questions</p>
+                    <p>
+                        {filteredQuestions.length} question
+                        {filteredQuestions.length !== 1 ? "s" : ""}
+                    </p>
                 </div>
                 <div>
                     <Button
@@ -103,6 +106,7 @@ export const QuizExpanded = ({
                     editQuestionSub={editQuestionSub}
                 ></QuizQuestion>
             ))}
+            <hr />
             <div className="footer">
                 <Button variant="danger" onClick={reset}>
                     Reset

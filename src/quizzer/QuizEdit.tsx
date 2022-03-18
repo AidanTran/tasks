@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Question } from "../interfaces/question";
 import { Quiz } from "../interfaces/quiz";
+import { QuestionEdit } from "./QuestionEdit";
 
 import "./QuizEdit.css";
 
@@ -20,15 +21,24 @@ export const QuizEdit = ({
 }) => {
     const [newQuiz, setNewQuiz] = useState<Quiz>({ ...quiz });
 
-    // const editQuestion = (questionId: number, newQuestion: Question) => {
-    //     setNewQuiz({
-    //         ...newQuiz,
-    //         questionList: newQuiz.questionList.map(
-    //             (q: Question): Question =>
-    //                 q.id === questionId ? newQuestion : q
-    //         )
-    //     });
-    // };
+    const editQuestion = (questionId: number, newQuestion: Question) => {
+        setNewQuiz({
+            ...newQuiz,
+            questionList: newQuiz.questionList.map(
+                (q: Question): Question =>
+                    q.id === questionId ? newQuestion : q
+            )
+        });
+    };
+
+    const removeQuestion = (questionId: number) => {
+        setNewQuiz({
+            ...newQuiz,
+            questionList: newQuiz.questionList.filter(
+                (q: Question) => q.id !== questionId
+            )
+        });
+    };
 
     const saveChanges = () => {
         editQuiz(quiz.id, { ...newQuiz });
@@ -70,7 +80,7 @@ export const QuizEdit = ({
                             className="published_check"
                             type="checkbox"
                             id="is-published_check"
-                            label="Published"
+                            label="Quiz Published"
                             checked={newQuiz.published}
                             onChange={(
                                 e: React.ChangeEvent<HTMLInputElement>
@@ -95,18 +105,18 @@ export const QuizEdit = ({
             </div>
 
             <div>
-                {newQuiz.questionList.map((q: Question) => (
-                    <p key={q.id}>{q.body}</p>
+                {newQuiz.questionList.map((q: Question, index: number) => (
+                    <QuestionEdit
+                        key={newQuiz.id + "|" + q.id}
+                        index={index}
+                        question={q}
+                        editQuestion={editQuestion}
+                        removeQuestion={removeQuestion}
+                        swapQuestion={swapQuestion}
+                    ></QuestionEdit>
                 ))}
             </div>
-            <Button
-                onClick={() => {
-                    swapQuestion(1, 2);
-                }}
-            >
-                Swap 2 and 3!
-            </Button>
-
+            <hr />
             <div className="edit_footer">
                 <div>
                     <Button
@@ -130,7 +140,7 @@ export const QuizEdit = ({
                         resetView();
                     }}
                 >
-                    Delete
+                    Delete Quiz
                 </Button>
             </div>
         </div>

@@ -7,6 +7,7 @@ describe("Quizzer Tests", () => {
         render(<Quizzer />);
     });
     test("The Quizzer renders", () => {
+        const modal = screen.getByRole("modal");
         // Up to you to decide what your tests are!
         // Add more tests, more components, more test files!
     });
