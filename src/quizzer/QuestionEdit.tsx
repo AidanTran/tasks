@@ -25,11 +25,13 @@ export const QuestionEdit = ({
 
     const handleNumOptions = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedAns(0);
+        const newNum =
+            parseInt(e.target.value) < 1 ? 1 : parseInt(e.target.value);
         editQuestion(question.id, {
             ...question,
             type: "multiple_choice_question",
             expected: "Example Answer",
-            options: Array(parseInt(e.target.value)).fill("Example Answer")
+            options: Array(newNum).fill("Example Answer")
         });
     };
 
