@@ -60,3 +60,15 @@
     align-items: center;
     gap: 0.75rem;
 }
+
+.type_form {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    width: 50%;
+}
+
+.num_choices {
+    width: 3.25rem;
+}

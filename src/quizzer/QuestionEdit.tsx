@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { Question } from "../interfaces/question";
+import { Question, QuestionType } from "../interfaces/question";
 
 import "./QuestionEdit.css";
 
@@ -22,6 +22,41 @@ export const QuestionEdit = ({
     const [selectedAns, setSelectedAns] = useState<number>(
         question.options.findIndex((s: string) => question.expected === s)
     );
+
+    const handleNumOptions = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSelectedAns(0);
+        editQuestion(question.id, {
+            ...question,
+            type: "multiple_choice_question",
+            expected: "Example Answer",
+            options: Array(parseInt(e.target.value)).fill("Example Answer")
+        });
+    };
+
+    const handleSwitch = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const newType = e.target.value as QuestionType;
+        if (newType === "multiple_choice_question") switchMulti();
+        if (newType === "short_answer_question") switchShortAns();
+    };
+
+    const switchMulti = () => {
+        setSelectedAns(0);
+        editQuestion(question.id, {
+            ...question,
+            type: "multiple_choice_question",
+            expected: "Example Answer",
+            options: Array(3).fill("Example Answer")
+        });
+    };
+
+    const switchShortAns = () => {
+        editQuestion(question.id, {
+            ...question,
+            type: "short_answer_question",
+            expected: "Example Answer",
+            options: []
+        });
+    };
 
     const handlePoints = (e: React.ChangeEvent<HTMLInputElement>) => {
         editQuestion(question.id, {
@@ -90,6 +125,37 @@ export const QuestionEdit = ({
                         <h4>pt{question.points !== 1 ? "s" : ""}</h4>
                     </div>
                 </div>
+
+                <div className="type_form">
+                    <Form.Group controlId="questionTypeFormId">
+                        <Form.Label>Type: </Form.Label>
+                        <Form.Select
+                            value={question.type}
+                            onChange={handleSwitch}
+                        >
+                            <option value="multiple_choice_question">
+                                Multiple Choice
+                            </option>
+                            <option value="short_answer_question">
+                                Short Answer
+                            </option>
+                        </Form.Select>
+                    </Form.Group>
+                    {question.type === "multiple_choice_question" && (
+                        <>
+                            <Form.Group controlId="editNumChoicesId">
+                                <Form.Label>Choices: </Form.Label>
+                                <Form.Control
+                                    className="num_choices"
+                                    value={question.options.length}
+                                    type="number"
+                                    onChange={handleNumOptions}
+                                ></Form.Control>
+                            </Form.Group>
+                        </>
+                    )}
+                </div>
+
                 <div className="edit_answer_box">
                     <div>
                         {question.type === "short_answer_question" && (
