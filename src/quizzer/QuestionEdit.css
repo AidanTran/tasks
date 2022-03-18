@@ -30,9 +30,26 @@
 
 .edit_answer_box {
     margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
 }
 
 .points_input {
     width: 4rem;
     margin-right: 0.5rem;
+}
+
+.swap_button_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.swap_button {
+    padding: 0.25rem;
+    height: 2rem;
+}
+
+.swap_button + .swap_button {
+    margin-top: 0.5rem;
 }

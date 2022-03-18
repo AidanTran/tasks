@@ -6,12 +6,14 @@ import "./QuestionEdit.css";
 
 export const QuestionEdit = ({
     index,
+    lastIndex,
     question,
     editQuestion,
     removeQuestion,
     swapQuestion
 }: {
     index: number;
+    lastIndex: number;
     question: Question;
     editQuestion: (questionId: number, newQuestion: Question) => void;
     removeQuestion: (questionId: number) => void;
@@ -27,13 +29,6 @@ export const QuestionEdit = ({
     return (
         <>
             <hr />
-            <Button
-                onClick={() => {
-                    swapQuestion(1, 2);
-                }}
-            >
-                Swap 1 and 2
-            </Button>
             <div className="edit_question">
                 <div className="edit_title_row">
                     <div className="edit_title_box">
@@ -70,37 +65,59 @@ export const QuestionEdit = ({
                     </div>
                 </div>
                 <div className="edit_answer_box">
-                    {question.type === "short_answer_question" && (
-                        <Form.Group controlId="formEditShortExpectedBox">
-                            <Form.Label>Answer:</Form.Label>
-                            <Form.Control
-                                value={question.expected}
-                                onChange={(
-                                    e: React.ChangeEvent<HTMLInputElement>
-                                ) => {
-                                    editQuestion(question.id, {
-                                        ...question,
-                                        expected: e.target.value
-                                    });
-                                }}
-                            ></Form.Control>
-                        </Form.Group>
-                    )}
-                    {/* {/* {question.type === "multiple_choice_question" && (
-                        <div>
-                            {question.options.map((option: string, i: number) => (
-                                <Form.Check
-                                    type="radio"
-                                    name={"questionChoice" + index}
-                                    key={option + " | " + i}
-                                    label={option}
-                                    value={option}
-                                    checked={question.submission === option}
-                                    onChange={handleClick}
-                                />
-                            ))}
-                        </div>
-                            )} */}
+                    <div>
+                        {question.type === "short_answer_question" && (
+                            <Form.Group controlId="formEditShortExpectedBox">
+                                <Form.Label>Answer:</Form.Label>
+                                <Form.Control
+                                    value={question.expected}
+                                    onChange={(
+                                        e: React.ChangeEvent<HTMLInputElement>
+                                    ) => {
+                                        editQuestion(question.id, {
+                                            ...question,
+                                            expected: e.target.value
+                                        });
+                                    }}
+                                ></Form.Control>
+                            </Form.Group>
+                        )}
+                        {/* {/* {question.type === "multiple_choice_question" && (
+                            <div>
+                                {question.options.map((option: string, i: number) => (
+                                    <Form.Check
+                                        type="radio"
+                                        name={"questionChoice" + index}
+                                        key={option + " | " + i}
+                                        label={option}
+                                        value={option}
+                                        checked={question.submission === option}
+                                        onChange={handleClick}
+                                    />
+                                ))}
+                            </div>
+                                )} */}
+                    </div>
+                    <div className="swap_button_container">
+                        <Button
+                            disabled={index === 0}
+                            className="swap_button"
+                            onClick={() => {
+                                swapQuestion(index, index - 1);
+                            }}
+                        >
+                            ▲
+                        </Button>
+                        <Button
+                            disabled={index === lastIndex}
+                            className="swap_button"
+                            onClick={() => {
+                                swapQuestion(index, index + 1);
+                            }}
+                        >
+                            ▼
+                        </Button>
+                    </div>
                 </div>
                 <div className="edit_question_footer">
                     <Form.Check

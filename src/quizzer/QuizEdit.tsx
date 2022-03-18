@@ -47,7 +47,7 @@ export const QuizEdit = ({
     const swapQuestion = (idx1: number, idx2: number) => {
         setNewQuiz({
             ...newQuiz,
-            questionList: quiz.questionList.map(
+            questionList: newQuiz.questionList.map(
                 (q: Question, idx: number): Question => {
                     if (idx === idx1) return newQuiz.questionList[idx2];
                     if (idx === idx2) return newQuiz.questionList[idx1];
@@ -109,6 +109,7 @@ export const QuizEdit = ({
                     <QuestionEdit
                         key={newQuiz.id + "|" + q.id}
                         index={index}
+                        lastIndex={newQuiz.questionList.length - 1}
                         question={q}
                         editQuestion={editQuestion}
                         removeQuestion={removeQuestion}
