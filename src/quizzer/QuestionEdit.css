@@ -1,10 +1,21 @@
 .edit_title_row {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.edit_title_box {
+    display: flex;
+    align-items: center;
+}
+
+.edit_title_box > h4 {
+    margin-bottom: 0.25rem;
 }
 
 .title_input {
-    width: 50%;
+    margin-left: 1rem;
+    text-align: center;
 }
 
 .edit_question {
@@ -15,4 +26,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.edit_answer_box {
+    margin-bottom: 1rem;
+}
+
+.points_input {
+    width: 4rem;
+    margin-right: 0.5rem;
 }
