@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Question } from "../interfaces/question";
 
@@ -19,10 +19,36 @@ export const QuestionEdit = ({
     removeQuestion: (questionId: number) => void;
     swapQuestion: (idx1: number, idx2: number) => void;
 }) => {
+    const [selectedAns, setSelectedAns] = useState<number>(
+        question.options.findIndex((s: string) => question.expected === s)
+    );
+
     const handlePoints = (e: React.ChangeEvent<HTMLInputElement>) => {
         editQuestion(question.id, {
             ...question,
             points: parseInt(e.target.value) < 0 ? 0 : parseInt(e.target.value)
+        });
+    };
+
+    const handleChoiceChange = (
+        e: React.ChangeEvent<HTMLInputElement>,
+        i: number
+    ) => {
+        const newOptions = [...question.options];
+        newOptions.splice(i, 1, e.target.value);
+        editQuestion(question.id, {
+            ...question,
+            options: newOptions,
+            expected: selectedAns === i ? e.target.value : question.expected
+        });
+    };
+
+    const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const idx = parseInt(e.target.value);
+        setSelectedAns(idx);
+        editQuestion(question.id, {
+            ...question,
+            expected: question.options[idx]
         });
     };
 
@@ -82,21 +108,36 @@ export const QuestionEdit = ({
                                 ></Form.Control>
                             </Form.Group>
                         )}
-                        {/* {/* {question.type === "multiple_choice_question" && (
-                            <div>
-                                {question.options.map((option: string, i: number) => (
-                                    <Form.Check
-                                        type="radio"
-                                        name={"questionChoice" + index}
-                                        key={option + " | " + i}
-                                        label={option}
-                                        value={option}
-                                        checked={question.submission === option}
-                                        onChange={handleClick}
-                                    />
-                                ))}
-                            </div>
-                                )} */}
+                        {question.type === "multiple_choice_question" && (
+                            <Form.Group controlId="formEditMultipleExpectedBox">
+                                <Form.Label>Answer:</Form.Label>
+                                {question.options.map(
+                                    (option: string, i: number) => (
+                                        <div
+                                            key={i}
+                                            className="radio_question_box"
+                                        >
+                                            <Form.Check
+                                                type="radio"
+                                                name={"questionChoice" + index}
+                                                value={i}
+                                                checked={selectedAns === i}
+                                                onChange={handleRadioChange}
+                                            />
+                                            <Form.Control
+                                                name={"questionChoice" + index}
+                                                value={option}
+                                                onChange={(
+                                                    e: React.ChangeEvent<HTMLInputElement>
+                                                ) => {
+                                                    handleChoiceChange(e, i);
+                                                }}
+                                            ></Form.Control>
+                                        </div>
+                                    )
+                                )}
+                            </Form.Group>
+                        )}
                     </div>
                     <div className="swap_button_container">
                         <Button

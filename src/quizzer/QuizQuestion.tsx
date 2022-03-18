@@ -21,7 +21,9 @@ export const QuizQuestion = ({
     editQuestionSub: (questionId: number, newAns: string) => void;
 }) => {
     const handleClick = (e: ChangeEvent) => {
-        editQuestionSub(question.id, e.target.value);
+        if (!submitted) {
+            editQuestionSub(question.id, e.target.value);
+        }
     };
 
     const handleSubmitClick = () => {
