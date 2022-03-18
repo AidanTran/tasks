@@ -7,8 +7,9 @@ describe("Quizzer Tests", () => {
         render(<Quizzer />);
     });
     test("The Quizzer renders", () => {
-        const modal = screen.getByRole("modal");
-        // Up to you to decide what your tests are!
-        // Add more tests, more components, more test files!
+        const button = screen.getByText("Add New Quiz");
+        expect(screen.queryByLabelText("Title: ")).not.toBeInTheDocument();
+        button.click();
+        expect(screen.queryByLabelText("Title:")).toBeInTheDocument();
     });
 });
