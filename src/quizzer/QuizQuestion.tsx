@@ -35,9 +35,14 @@ export const QuizQuestion = ({
         <>
             <hr />
             <div className="question">
-                <h4>
-                    {index + 1}. {question.body}
-                </h4>
+                <div className="question_header">
+                    <h4>
+                        {index + 1}. {question.body}
+                    </h4>
+                    <h4>
+                        {question.points} pt{question.points !== 1 ? "s" : ""}
+                    </h4>
+                </div>
                 <div className="answer_box">
                     {question.type === "short_answer_question" && (
                         <Form.Group controlId="formShortAnswerBox">

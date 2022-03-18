@@ -80,7 +80,7 @@ export const QuizEdit = ({
                             className="published_check"
                             type="checkbox"
                             id="is-published_check"
-                            label="Published"
+                            label="Quiz Published"
                             checked={newQuiz.published}
                             onChange={(
                                 e: React.ChangeEvent<HTMLInputElement>
