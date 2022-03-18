@@ -17,3 +17,11 @@
     justify-content: space-between;
     margin-bottom: 1rem;
 }
+.add_question_button {
+    display: block;
+    margin: 0 auto;
+}
+
+.type_dropdown {
+    min-width: 10rem;
+}

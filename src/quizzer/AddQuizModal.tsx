@@ -10,14 +10,14 @@ export const AddQuizModal = ({
     handleClose: () => void;
     addQuiz: (title: string, body: string) => void;
 }) => {
-    const [title, setTitle] = useState<string>("");
-    const [body, setBody] = useState<string>("");
+    const [title, setTitle] = useState<string>("Example Quiz");
+    const [body, setBody] = useState<string>("Example Description");
 
     const saveChanges = () => {
         console.log(body);
         addQuiz(title, body);
-        setTitle("");
-        setBody("");
+        setTitle("Example Quiz");
+        setBody("Example Description");
         handleClose();
     };
 
@@ -51,8 +51,8 @@ export const AddQuizModal = ({
                     <Button
                         variant="secondary"
                         onClick={() => {
-                            setTitle("");
-                            setBody("");
+                            setTitle("Example Quiz");
+                            setBody("Example Description");
                             handleClose();
                         }}
                     >
