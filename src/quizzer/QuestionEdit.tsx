@@ -27,6 +27,13 @@ export const QuestionEdit = ({
     return (
         <>
             <hr />
+            <Button
+                onClick={() => {
+                    swapQuestion(1, 2);
+                }}
+            >
+                Swap 1 and 2
+            </Button>
             <div className="edit_question">
                 <div className="edit_title_row">
                     <div className="edit_title_box">
