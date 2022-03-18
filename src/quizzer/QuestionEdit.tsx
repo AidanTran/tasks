@@ -125,85 +125,93 @@ export const QuestionEdit = ({
                         <h4>pt{question.points !== 1 ? "s" : ""}</h4>
                     </div>
                 </div>
-
-                <div className="type_form">
-                    <Form.Group controlId="questionTypeFormId">
-                        <Form.Label>Type: </Form.Label>
-                        <Form.Select
-                            value={question.type}
-                            onChange={handleSwitch}
-                        >
-                            <option value="multiple_choice_question">
-                                Multiple Choice
-                            </option>
-                            <option value="short_answer_question">
-                                Short Answer
-                            </option>
-                        </Form.Select>
-                    </Form.Group>
-                    {question.type === "multiple_choice_question" && (
-                        <>
-                            <Form.Group controlId="editNumChoicesId">
-                                <Form.Label>Choices: </Form.Label>
-                                <Form.Control
-                                    className="num_choices"
-                                    value={question.options.length}
-                                    type="number"
-                                    onChange={handleNumOptions}
-                                ></Form.Control>
+                <div className="center_section">
+                    <div className="edit_answer_box">
+                        <div className="type_form">
+                            <Form.Group controlId="questionTypeFormId">
+                                <Form.Label>Type: </Form.Label>
+                                <Form.Select
+                                    className="type_dropdown"
+                                    value={question.type}
+                                    onChange={handleSwitch}
+                                >
+                                    <option value="multiple_choice_question">
+                                        Multiple Choice
+                                    </option>
+                                    <option value="short_answer_question">
+                                        Short Answer
+                                    </option>
+                                </Form.Select>
                             </Form.Group>
-                        </>
-                    )}
-                </div>
-
-                <div className="edit_answer_box">
-                    <div>
-                        {question.type === "short_answer_question" && (
-                            <Form.Group controlId="formEditShortExpectedBox">
-                                <Form.Label>Answer:</Form.Label>
-                                <Form.Control
-                                    value={question.expected}
-                                    onChange={(
-                                        e: React.ChangeEvent<HTMLInputElement>
-                                    ) => {
-                                        editQuestion(question.id, {
-                                            ...question,
-                                            expected: e.target.value
-                                        });
-                                    }}
-                                ></Form.Control>
-                            </Form.Group>
-                        )}
-                        {question.type === "multiple_choice_question" && (
-                            <Form.Group controlId="formEditMultipleExpectedBox">
-                                <Form.Label>Answer:</Form.Label>
-                                {question.options.map(
-                                    (option: string, i: number) => (
-                                        <div
-                                            key={i}
-                                            className="radio_question_box"
-                                        >
-                                            <Form.Check
-                                                type="radio"
-                                                name={"questionChoice" + index}
-                                                value={i}
-                                                checked={selectedAns === i}
-                                                onChange={handleRadioChange}
-                                            />
-                                            <Form.Control
-                                                name={"questionChoice" + index}
-                                                value={option}
-                                                onChange={(
-                                                    e: React.ChangeEvent<HTMLInputElement>
-                                                ) => {
-                                                    handleChoiceChange(e, i);
-                                                }}
-                                            ></Form.Control>
-                                        </div>
-                                    )
-                                )}
-                            </Form.Group>
-                        )}
+                            {question.type === "multiple_choice_question" && (
+                                <>
+                                    <Form.Group controlId="editNumChoicesId">
+                                        <Form.Label>Choices: </Form.Label>
+                                        <Form.Control
+                                            className="num_choices"
+                                            value={question.options.length}
+                                            type="number"
+                                            onChange={handleNumOptions}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </>
+                            )}
+                        </div>
+                        <div>
+                            {question.type === "short_answer_question" && (
+                                <Form.Group controlId="formEditShortExpectedBox">
+                                    <Form.Label>Answer:</Form.Label>
+                                    <Form.Control
+                                        value={question.expected}
+                                        onChange={(
+                                            e: React.ChangeEvent<HTMLInputElement>
+                                        ) => {
+                                            editQuestion(question.id, {
+                                                ...question,
+                                                expected: e.target.value
+                                            });
+                                        }}
+                                    ></Form.Control>
+                                </Form.Group>
+                            )}
+                            {question.type === "multiple_choice_question" && (
+                                <Form.Group controlId="formEditMultipleExpectedBox">
+                                    <Form.Label>Answer:</Form.Label>
+                                    {question.options.map(
+                                        (option: string, i: number) => (
+                                            <div
+                                                key={i}
+                                                className="radio_question_box"
+                                            >
+                                                <Form.Check
+                                                    type="radio"
+                                                    name={
+                                                        "questionChoice" + index
+                                                    }
+                                                    value={i}
+                                                    checked={selectedAns === i}
+                                                    onChange={handleRadioChange}
+                                                />
+                                                <Form.Control
+                                                    name={
+                                                        "questionChoice" + index
+                                                    }
+                                                    value={option}
+                                                    onChange={(
+                                                        e: React.ChangeEvent<HTMLInputElement>
+                                                    ) => {
+                                                        handleChoiceChange(
+                                                            e,
+                                                            i
+                                                        );
+                                                    }}
+                                                ></Form.Control>
+                                            </div>
+                                        )
+                                    )}
+                                </Form.Group>
+                            )}
+                        </div>
                     </div>
                     <div className="swap_button_container">
                         <Button

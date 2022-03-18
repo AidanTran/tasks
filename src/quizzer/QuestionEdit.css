@@ -22,13 +22,17 @@
     padding: 20px 0;
 }
 
+.edit_answer_box {
+    width: 50%;
+}
+
 .edit_question_footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.edit_answer_box {
+.center_section {
     margin-bottom: 1rem;
     display: flex;
     justify-content: space-between;
