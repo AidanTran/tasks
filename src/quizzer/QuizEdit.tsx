@@ -81,6 +81,7 @@ export const QuizEdit = ({
                             type="checkbox"
                             id="is-published_check"
                             label="Quiz Published"
+                            data-testid="Quiz Published"
                             checked={newQuiz.published}
                             onChange={(
                                 e: React.ChangeEvent<HTMLInputElement>

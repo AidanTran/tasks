@@ -20,7 +20,6 @@ export const QuizList = ({
 
     const handleQuizView = (id: number) => {
         setDisplayId(id);
-        console.log(displayId);
     };
 
     const resetQuizView = () => {

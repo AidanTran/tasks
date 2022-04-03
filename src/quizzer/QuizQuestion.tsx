@@ -38,7 +38,7 @@ export const QuizQuestion = ({
             <hr />
             <div className="question">
                 <div className="question_header">
-                    <h4>
+                    <h4 data-testid="question_body">
                         {index + 1}. {question.body}
                     </h4>
                     <h4>
@@ -49,6 +49,7 @@ export const QuizQuestion = ({
                     {question.type === "short_answer_question" && (
                         <Form.Group controlId="formShortAnswerBox">
                             <Form.Control
+                                data-testid="select-option"
                                 value={question.submission}
                                 onChange={handleClick}
                             ></Form.Control>

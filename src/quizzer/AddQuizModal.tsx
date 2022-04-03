@@ -14,7 +14,6 @@ export const AddQuizModal = ({
     const [body, setBody] = useState<string>("Example Description");
 
     const saveChanges = () => {
-        console.log(body);
         addQuiz(title, body);
         setTitle("Example Quiz");
         setBody("Example Description");

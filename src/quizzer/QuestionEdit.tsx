@@ -102,6 +102,7 @@ export const QuestionEdit = ({
                         >
                             <Form.Control
                                 value={question.body}
+                                data-testid="edit_question_title"
                                 onChange={(
                                     e: React.ChangeEvent<HTMLInputElement>
                                 ) => {
@@ -137,10 +138,20 @@ export const QuestionEdit = ({
                                     value={question.type}
                                     onChange={handleSwitch}
                                 >
-                                    <option value="multiple_choice_question">
+                                    <option
+                                        data-testid={
+                                            "question_type_dropdown_" + index
+                                        }
+                                        value="multiple_choice_question"
+                                    >
                                         Multiple Choice
                                     </option>
-                                    <option value="short_answer_question">
+                                    <option
+                                        data-testid={
+                                            "question_type_dropdown_" + index
+                                        }
+                                        value="short_answer_question"
+                                    >
                                         Short Answer
                                     </option>
                                 </Form.Select>
@@ -239,8 +250,9 @@ export const QuestionEdit = ({
                 <div className="edit_question_footer">
                     <Form.Check
                         className="published_question_check"
+                        data-testid="question_published_check"
                         type="checkbox"
-                        id="is-question_published_check"
+                        id="is_question_published_check"
                         label="Published"
                         checked={question.published}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {

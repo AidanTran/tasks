@@ -69,38 +69,45 @@ export const Quizzer = () => {
                 <h2>Completed Features</h2>
                 <ul className="completedList">
                     <li>
+                        {" "}
                         Users can see a list of quizzes, including the quizzes
                         title, description, and how many questions it has
+                        (TESTED)
                     </li>
                     <li>
                         Users can select a specific quiz to see the questions,
-                        including the questions name, body, and points
+                        including the questions name, body, and points (TESTED)
                     </li>
                     <li>
                         Quiz questions can be of AT LEAST two types: a short
-                        answer question or multiple choice question
+                        answer question or multiple choice question (TESTED)
                     </li>
                     <li>
                         Users can enter or choose an answer for a quiz question,
-                        and be told if they are correct
+                        and be told if they are correct (TESTED)
                     </li>
                     <li>
                         Users can see how many total points they have earned
+                        (TESTED)
                     </li>
                     <li>
                         Users can clear out their existing answers for a quiz
+                        (TESTED)
                     </li>
-                    <li>Users can publish or unpublish a question</li>
+                    <li>Users can publish or unpublish a question (TESTED)</li>
                     <li>
                         Users can filter the questions in a list so that only
-                        published questions are shown
+                        published questions are shown (TESTED)
                     </li>
-                    <li>Users can edit the questions and fields of a quiz</li>
-                    <li>Users can add a new quiz question</li>
-                    <li>Users can delete an existing quiz question</li>
-                    <li>Users can reorder quiz questions</li>
-                    <li>Users can add a new quiz</li>
-                    <li>Users can delete an existing quiz</li>
+                    <li>
+                        Users can edit the questions and fields of a quiz
+                        (TESTED)
+                    </li>
+                    <li>Users can add a new quiz question (TESTED)</li>
+                    <li>Users can delete an existing quiz question (TESTED)</li>
+                    <li>Users can reorder quiz questions (TESTED)</li>
+                    <li>Users can add a new quiz (TESTED)</li>
+                    <li>Users can delete an existing quiz (TESTED)</li>
                 </ul>
             </div>
         </div>
