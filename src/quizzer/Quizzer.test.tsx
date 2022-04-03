@@ -269,9 +269,11 @@ describe("Quizzer Tests", () => {
 
         const dropdown = screen.getAllByLabelText("Type:")[0];
         userEvent.selectOptions(dropdown, "multiple_choice_question");
-        const options = screen.getAllByTestId("question_type_dropdown_0");
-        expect((options[0] as HTMLOptionElement).selected).toBeTruthy();
-        expect((options[1] as HTMLOptionElement).selected).toBeFalsy();
+        const options: HTMLOptionElement[] = screen.getAllByTestId(
+            "question_type_dropdown_0"
+        );
+        expect(options[0].selected).toBeTruthy();
+        expect(options[1].selected).toBeFalsy();
 
         const saveButton = screen.getByText("Save");
         saveButton.click();
