@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { Quiz } from "../interfaces/quiz";
 import { Question, QuestionType } from "../interfaces/question";
 import { Quizzer } from "./Quizzer";
